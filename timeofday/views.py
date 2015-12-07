@@ -1,8 +1,6 @@
-import datetime
+from flask import jsonify, render_template, Blueprint
 
 from astral import Astral
-
-from flask import jsonify, render_template, request, Blueprint
 
 views_blueprint = Blueprint('views', __name__, template_folder='templates')
 
