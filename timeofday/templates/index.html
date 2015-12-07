@@ -1,9 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en">
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
         
+        <title>Time of Day</title>
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        {% assets "css_all" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+        {% endassets %}
     </head>
     <body>
         <h1>Hi!</h1>
+        
+        {% assets "js_all" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
     </body>
 </html>

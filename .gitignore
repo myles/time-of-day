@@ -1,3 +1,10 @@
+bower_components/
+
+timeofday/static/*
+!timeofday/static/stylesheets/
+!timeofday/static/javascript/
+!timeofday/static/images/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

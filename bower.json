@@ -1,0 +1,7 @@
+{
+  "name": "time-of-day",
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "old-fashioned": "https://github.com/myles/old-fashioned.git"
+  }
+}
