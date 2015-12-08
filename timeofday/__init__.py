@@ -23,7 +23,8 @@ assets.load_path = [
     os.path.join(os.path.dirname(__file__), 'static')
 ]
 
-assets.register('js_all',
+assets.register(
+    'js_all',
     Bundle(
         'jquery/dist/jquery.min.js',
         Bundle(
@@ -42,7 +43,8 @@ scss = get_filter('scss', as_output=True, load_paths=[
     os.path.join(os.path.dirname(__file__), 'static/stylesheets')
 ])
 
-assets.register('css_all',
+assets.register(
+    'css_all',
     Bundle(
         'stylesheets/style.scss',
         filters=[scss],
