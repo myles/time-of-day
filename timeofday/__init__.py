@@ -27,6 +27,7 @@ assets.register(
     'js_all',
     Bundle(
         'jquery/dist/jquery.min.js',
+        'moment/min/moment.min.js',
         Bundle(
             'javascript/script.coffee',
             filters=['coffeescript']

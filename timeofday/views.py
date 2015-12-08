@@ -16,6 +16,7 @@ def index():
 def api_v1():
     astral = Astral()
     astral.solar_depression = 'civil'
+    astral.depression = 6.0
 
     city = astral['Toronto']
 
@@ -25,20 +26,37 @@ def api_v1():
         'is_civil_twlight': False,
         'is_nautical_twlight': False,
         'is_astronomical_twilight': False,
-        'times-of-day': city.sun()
+        'is_blue_hour': False,
+        'solar_zenith_angle': city.solar_zenith(),
+        'solar_elevation_angle': city.solar_elevation(),
+        'solar_azimuth_angle': city.solar_azimuth(),
+        'times_of_day': city.sun()
     }
 
-    if 0 <= city.solar_zenith() <= -6:
-        response['is_civil_twlight'] = True
-    elif -6 <= city.solar_zenith() <= -12:
-        response['is_nautical_twlight'] = True
-    elif -12 <= city.solar_zenith() <= -18:
-        response['is_astronomical_twilight'] = True
+    current_datetime = datetime.datetime.now(city.tz)
 
-    if city.sunrise() < datetime.datetime.now(city.tz) < city.sunset():
+    if city.sunrise() < current_datetime < city.sunset():
         response['is_day'] = True
     else:
         response['is_night'] = True
+
+    if -6 <= city.solar_zenith() <= 0:
+        response['is_civil_twlight'] = True
+        response['is_day'] = False
+        response['is_night'] = False
+    elif -12 <= city.solar_zenith() <= -6:
+        response['is_nautical_twlight'] = True
+        response['is_day'] = False
+        response['is_night'] = False
+    elif -18 <= city.solar_zenith() <= -12:
+        response['is_astronomical_twilight'] = True
+        response['is_day'] = False
+        response['is_night'] = False
+
+    if -6 <= city.solar_zenith() <= -4:
+        response['is_blue_hour'] = True
+    elif -4 <= city.solar_zenith() <= 6:
+        response['is_golden_hour'] = True
 
     if 0 <= city.moon_phase() < 7:
         response['moon_phase'] = 'new-moon'
