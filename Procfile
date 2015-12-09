@@ -1,1 +1,3 @@
-web: gunicorn -w 4 -b 0.0.0.0:$PORT -k gevent timeofday:app
+web: waitress-serve --port=$PORT timeofday:app
+assets: python manage.py assets build -q
+
