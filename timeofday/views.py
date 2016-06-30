@@ -64,6 +64,7 @@ def api_v1():
         'is_nautical_twlight': False,
         'is_astronomical_twilight': False,
         'is_blue_hour': False,
+        'is_golden_hour': False,
         'solar_zenith_angle': city.solar_zenith(),
         'solar_elevation_angle': city.solar_elevation(),
         'solar_azimuth_angle': city.solar_azimuth(),
