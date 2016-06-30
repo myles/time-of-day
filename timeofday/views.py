@@ -3,6 +3,7 @@ import datetime
 from flask import jsonify, render_template, Blueprint
 
 from astral import Astral
+from icalendar import Calendar, Event
 
 views_blueprint = Blueprint('views', __name__, template_folder='templates')
 
@@ -10,6 +11,35 @@ views_blueprint = Blueprint('views', __name__, template_folder='templates')
 @views_blueprint.route('/')
 def index():
     return render_template('index.html')
+
+
+@views_blueprint.route('/ics')
+def ics():
+    astral = Astral()
+    astral.solar_depression = 'civil'
+    astral.depression = 6.0
+
+    city = astral['Toronto']
+
+    cal = Calendar()
+    cal.add('prodid', '-//Time of Day//time-of-day.herokuapp.com//')
+    cal.add('version', '2.0')
+
+    today = datetime.date.today()
+
+    for x in range(-7, 8):
+        date = today + datetime.timedelta(days=x)
+
+        sun = city.sun(date=date, local=True)
+
+        for summary, time in sun:
+            event = Event()
+            event.add('summary', summary)
+            event.add('dtstart', time)
+            event.add('dtend', time)
+            event.add('dtstamp', time)
+            
+            cal.add_component(event)
 
 
 @views_blueprint.route('/api/v1')
