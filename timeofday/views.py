@@ -1,6 +1,6 @@
 import datetime
 
-from flask import jsonify, render_template, Blueprint
+from flask import jsonify, render_template, Response, Blueprint
 
 from astral import Astral
 from icalendar import Calendar, Event
@@ -32,14 +32,21 @@ def ics():
 
         sun = city.sun(date=date, local=True)
 
-        for summary, time in sun:
+        for summary, time in sun.items():
             event = Event()
-            event.add('summary', summary)
+            event.add('summary', summary.capitalize())
             event.add('dtstart', time)
             event.add('dtend', time)
             event.add('dtstamp', time)
-            
+
             cal.add_component(event)
+
+    headers = {
+        'Content-Disposition': 'attachment; filename=time-of-day.ics',
+        'Content-Type': 'text/calendar'
+    }
+
+    return Response(cal.to_ical(), 'text/calendar', headers)
 
 
 @views_blueprint.route('/api/v1')
