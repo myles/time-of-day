@@ -3,8 +3,12 @@
 // BSD License
 // https://github.com/myles/time-of-day/blob/master/LICENSE
 
-@import 'old-fashioned.scss';
+@import 'bourbon/app/assets/stylesheets/bourbon';
+@import 'neat/app/assets/stylesheets/neat';
+
+@import 'variables';
+
+@import 'bitters/core/base';
 
 // time-of-day
-@import 'variables';
 @import 'global';
