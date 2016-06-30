@@ -20,6 +20,12 @@ class TestApp(unittest.TestCase):
         self.assertTrue(rv.data)
         self.assertEqual(rv.status_code, 200)
 
+    def test_ics_works(self):
+        rv = self.app.get('/ics')
+        self.assertTrue(rv.data)
+        self.assertEqual(rv.status_code, 200)
+        self.assertEqual(rv.headers['Content-Type'], 'text/calendar')
+
 
 if __name__ == '__main__':
     unittest.main()
