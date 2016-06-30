@@ -36,7 +36,7 @@ assets.register(
     )
 )
 
-scss = get_filter('sass', as_output=True, load_paths=[
+scss = get_filter('scss', as_output=True, load_paths=[
     os.path.join(bower_dir, 'bourbon/app/assets/stylesheets/'),
     os.path.join(bower_dir, 'neat/app/assets/stylesheets/'),
     os.path.join(bower_dir, 'modular-scale/stylesheets/'),
